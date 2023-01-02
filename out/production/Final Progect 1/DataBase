@@ -1,0 +1,65 @@
+/*DROP SCHEMA company;
+*/
+CREATE SCHEMA company;
+
+CREATE TABLE company.Proyect.Company(
+	company_id INT NOT NULL auto_increment,
+    company_name VARCHAR(40),
+    company_email VARCHAR(40),
+    company_password VARCHAR(40),
+    PRIMARY KEY(company_id)
+);
+
+
+CREATE TABLE company.Customers(
+	customer_id INT NOT NULL auto_increment,
+    customer_first_name varchar(40),
+    customer_last_name varchar(40),
+    customer_email varchar(40),
+    customer_password VARCHAR(40),
+    PRIMARY KEY(customer_id)
+
+);
+
+CREATE TABLE company.Categories(
+	categories_id INT NOT NULL auto_increment,
+    categories_name VARCHAR(40),
+	PRIMARY KEY(categories_id)
+
+);
+
+CREATE TABLE company.Coupons(
+	coupon_id INT NOT NULL auto_increment,
+    company_id INT,
+    categories_id INT,
+    coupon_title VARCHAR(40),
+	coupon_description VARCHAR(40),
+    coupon_start_date DATE,
+    coupon_end_date DATE,
+    coupon_amount INT,
+    coupon_price DOUBLE,
+    coupon_image varchar(50),
+	PRIMARY KEY(coupon_id),
+	FOREIGN KEY(company_id) REFERENCES Proyect.Company(company_id),
+    FOREIGN KEY(categories_id) REFERENCES Categories(categories_id)
+
+);
+
+CREATE TABLE company.Customers_VS_Coupons(
+	coupon_id INT,
+    customer_id INT,
+    PRIMARY KEY(coupon_id,customer_id),
+	FOREIGN KEY(coupon_id) REFERENCES Coupons(coupon_id),
+    FOREIGN KEY(customer_id) REFERENCES Customers(customer_id)
+
+);
+
+/*ALTER TABLE Employees ADD COLUMN adress varchar(40);
+ALTER TABLE Employees ADD CONSTRAINT PRIMARY KEY (empl_id);
+*/
+companycompany_idINSERT INTO company.Proyect.Company(company_id,company_name,company_email,company_password) VALUES
+(100,"comp1","comp1@email.com","123"),
+(101,"comp2","comp2@email.com","1234"),
+(102,"comp3","comp3@email.com","12345"),
+(103,"comp4","comp4@email.com","123456");
+/DROP TABLE Employees;/
